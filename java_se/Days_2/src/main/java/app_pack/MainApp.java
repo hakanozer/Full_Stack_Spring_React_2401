@@ -51,5 +51,50 @@ public class MainApp {
         System.out.println( x++ );
         System.out.println( x );
 
+        --x;--x;--x;--x;--x;--x;
+        System.out.println(x);
+
+        // Mantıksal Operatörler
+        // ==
+        // !=
+        // >
+        // <
+        // >=
+        // <=
+        // boolean - true - false
+        boolean status = false;
+        int q = 10;
+        int w = 11;
+
+        // == -> eşit mi diye kıyaslama yapar
+        status = q == w;
+        System.out.println(status);
+
+        // != -> eşit değil ise
+        status = q != w;
+        System.out.println(status);
+
+        // > -> sol taraftaki değer sağ taraftakinden büyük ise
+        status = q > w;
+        System.out.println(status);
+
+        // < -> sol taraftaki değer sağ taraftakinden küçük ise
+        status = q < w;
+        System.out.println(status);
+
+        // >= -> sol taraftaki değer sağ taraftaki değerden büyük veya eşit ise
+        status = q >= w;
+        System.out.println(status);
+
+        // <= -> sol taraftaki değer sağ taraftaki değerden küçük veya eşit ise
+        status = q <= w;
+        System.out.println(status);
+
+        // String equals -> kıyaslama
+        String email = "ali@mail.com";
+        String userEmail = "alim@mail.com";
+        status = email.equals(userEmail);
+        System.out.println(status);
+
     }
 }
