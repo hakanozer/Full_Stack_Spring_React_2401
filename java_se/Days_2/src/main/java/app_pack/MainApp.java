@@ -96,5 +96,35 @@ public class MainApp {
         status = email.equals(userEmail);
         System.out.println(status);
 
+        String stringBoolean = "true";
+        boolean bool = Boolean.valueOf(stringBoolean);
+        boolean boolSt = Boolean.parseBoolean(stringBoolean);
+
+        double b1 = 50.7;
+        int intB1 = (int) b1;
+
+        // ==============================
+        double p1 = 21.1;
+        double p2 = 66.7;
+        double p3 = 99.4;
+
+        double dSum = p1 + p2 + p3;
+        int iSum = (int) dSum;
+
+        int ip1 = (int) p1;
+        int ip2 = (int) p2;
+        int ip3 = (int) p3;
+
+        int sum = ip1 + ip2 + ip3;
+        System.out.println( dSum );
+        System.out.println(sum); // 186
+        System.out.println(iSum); // 187
+
+        System.out.println("==================");
+        System.out.println( Math.floor(dSum) );
+        System.out.println( Math.ceil(dSum) );
+        System.out.println( Math.round(dSum) );
+
+
     }
 }
