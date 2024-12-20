@@ -38,5 +38,14 @@ public class MainApp {
 
         xx.charSumNumber("Alanya", 100);
 
+        // kullanıcıdan göndereceğimiz dizi eleman sayısı kadar sayı al, ve toplamanı yaz ama
+        // 100 değeri ve üstü değerleri toplam sonucuna dahil etme.
+        int[] numbers = new int[2];
+        xx.numberSum(numbers, 50);
+        // 3. sayının toplamı : 198
+
+        int sm = xx.sum(50,78);
+        System.out.println("Sum Fnc: " + sm);
+
     }
 }
