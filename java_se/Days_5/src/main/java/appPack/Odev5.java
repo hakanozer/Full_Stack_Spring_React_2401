@@ -22,5 +22,6 @@ public class Odev5 {
         String[] days = { "Salı", "Pazartesi", "Cuma", "Çarşamba", "Perşembe", "Cuma", "Pazartesi"};
         action.soru_9(days);
 
+
     }
 }
