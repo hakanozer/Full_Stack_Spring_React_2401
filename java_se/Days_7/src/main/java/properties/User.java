@@ -22,9 +22,7 @@ public class User {
     }
 
     public void setName(String name) {
-        if (name.length() < 50 ) {
-            this.name = name;
-        }
+        this.name = name;
     }
 
     public String getSurname() {
