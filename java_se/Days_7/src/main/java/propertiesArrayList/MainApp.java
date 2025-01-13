@@ -25,8 +25,5 @@ public class MainApp {
 
         list.add(p1);
 
-
-
-
     }
 }
