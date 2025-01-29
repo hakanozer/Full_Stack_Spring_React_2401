@@ -29,7 +29,9 @@ public class FileControl {
 
     public void writeLine(String line) {
         try {
+            List<String> ls = readFile();
             FileWriter fw = new FileWriter(file, true);
+            line = (ls.size() + 1) + " - " + line;
             fw.write(line); // -> windows \r\n, -> mac \n
             fw.write(System.lineSeparator());
             fw.close(); // yazma işlemi burada tamamlanır.
@@ -46,6 +48,7 @@ public class FileControl {
                 String line = sc.nextLine();
                 lines.add(line);
             }
+            sc.close();
         }catch (Exception ex) {
             System.err.println("readFile error");
         }
