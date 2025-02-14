@@ -14,7 +14,7 @@ public class CustomerService {
 
     final CustomerRepository customerRepository;
 
-    public Customer saveCustomer(Customer customer){
+    public Customer saveCustomer(Customer customer ){
         // save
         // insert into customer values(null, ?, ?, ?, ?)
         customerRepository.save(customer);
