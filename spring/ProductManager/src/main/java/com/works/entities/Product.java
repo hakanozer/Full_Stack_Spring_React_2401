@@ -36,11 +36,11 @@ public class Product {
     @NotNull
     private BigDecimal price;
 
-    @Size(min = 6, max = 6)
+    @Size(min = 7, max = 7)
     private String color;
 
     // 19-02-2025 20:52:22
-    @DateTimeFormat(pattern = "YYYY")
+    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
 
 
