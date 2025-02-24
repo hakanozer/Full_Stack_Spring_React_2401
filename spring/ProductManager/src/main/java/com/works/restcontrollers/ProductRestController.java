@@ -32,8 +32,12 @@ public class ProductRestController {
     }
 
     @GetMapping("single")
-    public Product singleProduct() {
-        return productService.singleProduct(1l);
+    public Product singleProduct(
+            @RequestParam(defaultValue = "1") long pid,
+            @RequestParam(defaultValue = "0") int cid
+    ) {
+        System.out.println(cid);
+        return productService.singleProduct(pid);
     }
 
 }

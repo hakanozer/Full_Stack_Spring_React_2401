@@ -35,6 +35,12 @@ public class ProductService {
     }
 
     public Product singleProduct( long pid ) {
+        Optional<Product> product = productRepository.findById(pid);
+        return product.orElse(null);
+    }
+
+    /*
+    public Product singleProduct( long pid ) {
         Optional<Product> optionalProduct = productRepository.findById(pid);
         if (optionalProduct.isPresent()) {
             Product product = optionalProduct.get();
@@ -46,5 +52,6 @@ public class ProductService {
         }
         return optionalProduct.orElse(null);
     }
+     */
 
 }
