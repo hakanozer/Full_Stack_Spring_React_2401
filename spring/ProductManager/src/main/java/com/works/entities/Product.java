@@ -1,10 +1,11 @@
 package com.works.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.works.utils.EProduct;
+import com.works.utils.KasimValid;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -39,8 +40,7 @@ public class Product {
     @Size(min = 7, max = 7)
     private String color;
 
-    // 19-02-2025 20:52:22
-    //@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date date;
 
 

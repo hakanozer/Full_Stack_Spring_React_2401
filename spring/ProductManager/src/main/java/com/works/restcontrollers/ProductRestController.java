@@ -31,4 +31,9 @@ public class ProductRestController {
         return productService.all();
     }
 
+    @GetMapping("single")
+    public Product singleProduct() {
+        return productService.singleProduct(1l);
+    }
+
 }
