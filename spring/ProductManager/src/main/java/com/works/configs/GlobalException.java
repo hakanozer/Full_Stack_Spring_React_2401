@@ -1,12 +1,14 @@
 package com.works.configs;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.*;
 
@@ -42,6 +44,25 @@ public class GlobalException {
         map.put("status", false);
         map.put("message", ex.getMessage());
         return map;
+    }
+
+    /*
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public Map methodArgumentTypeMismatch( MethodArgumentTypeMismatchException ex ) {
+        Map map = new LinkedHashMap();
+        map.put("status", false);
+        map.put("message", ex.getMessage());
+        return map;
+    }
+     */
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity methodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex ) {
+        Map map = new LinkedHashMap();
+        map.put("status", false);
+        map.put("message", ex.getMessage());
+        return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
     }
 
 
