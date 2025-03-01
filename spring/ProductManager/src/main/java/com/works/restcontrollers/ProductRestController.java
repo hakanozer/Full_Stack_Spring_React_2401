@@ -3,9 +3,13 @@ package com.works.restcontrollers;
 import com.works.entities.Product;
 import com.works.services.ProductService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("product")
+@Validated
 public class ProductRestController {
 
     final ProductService productService;
@@ -31,7 +36,7 @@ public class ProductRestController {
     @GetMapping("list")
     public Page<Product> list(
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size
+            @Min(5) @Max(20) @RequestParam int size
     ) {
         return productService.all(page, size);
     }
@@ -45,7 +50,14 @@ public class ProductRestController {
         return productService.singleProduct(pid);
     }
 
-
+    @GetMapping("search")
+    public Page<Product> search(
+            @RequestParam(defaultValue = "") String q,
+            @RequestParam(defaultValue = "0") int page,
+            @Min(5) @Max(20) @RequestParam(defaultValue = "10") int size
+    ) {
+        return productService.productSearch(q, page, size);
+    }
 
 
 }

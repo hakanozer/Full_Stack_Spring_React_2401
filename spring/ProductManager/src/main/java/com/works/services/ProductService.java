@@ -69,4 +69,11 @@ public class ProductService {
     }
      */
 
+
+    // product search
+    public Page<Product> productSearch(String q, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return productRepository.findByTitleContainsOrDescriptionContainsAllIgnoreCase(q,q, pageable);
+    }
+
 }

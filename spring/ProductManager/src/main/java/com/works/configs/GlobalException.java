@@ -1,5 +1,6 @@
 package com.works.configs;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -59,6 +60,14 @@ public class GlobalException {
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity methodArgumentTypeMismatch(MethodArgumentTypeMismatchException ex ) {
+        Map map = new LinkedHashMap();
+        map.put("status", false);
+        map.put("message", ex.getMessage());
+        return new ResponseEntity(map, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity methodArgumentTypeMismatch(ConstraintViolationException ex ) {
         Map map = new LinkedHashMap();
         map.put("status", false);
         map.put("message", ex.getMessage());
