@@ -51,7 +51,9 @@ public class ProductService {
 
     public Product singleProduct(long pid ) {
         Optional<Product> product = productRepository.findById(pid);
-        return product.orElse(null);
+        Product pro = product.orElse(null);
+        System.out.println(pro);
+        return pro;
     }
 
     /*
@@ -77,3 +79,4 @@ public class ProductService {
     }
 
 }
+

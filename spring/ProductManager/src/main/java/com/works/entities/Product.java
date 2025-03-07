@@ -2,7 +2,6 @@ package com.works.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.works.utils.EProduct;
-import com.works.utils.KasimValid;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
