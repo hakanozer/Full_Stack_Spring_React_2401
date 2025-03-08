@@ -1,0 +1,1 @@
+tüm jpa conditation parametleri ile birer adet örnek hazırlanacak.
