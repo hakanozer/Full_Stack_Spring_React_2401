@@ -3,6 +3,7 @@ package com.works.services;
 import com.works.entities.Product;
 import com.works.repositories.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -76,6 +77,23 @@ public class ProductService {
     public Page<Product> productSearch(String q, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return productRepository.findByTitleContainsOrDescriptionContainsAllIgnoreCase(q,q, pageable);
+    }
+
+    public List<Product> getColors(String color) {
+        color ="#"+color;
+        return productRepository.findByColorEqualsIgnoreCase(color);
+    }
+
+    public ResponseEntity<Product> productUpdate(Product product) {
+        if (product.getPid() == null || product.getPid() < 1) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        Optional<Product> productOptional = productRepository.findById(product.getPid());
+        if (productOptional.isPresent()) {
+            productRepository.saveAndFlush(product);
+            return new ResponseEntity<>(product, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

@@ -59,5 +59,14 @@ public class ProductRestController {
         return productService.productSearch(q, page, size);
     }
 
+    @GetMapping("getColor/{color}")
+    public List<Product> getColor( @PathVariable String color ) {
+        return productService.getColors(color);
+    }
+
+    @PutMapping("update")
+    public ResponseEntity<Product> update(@Valid @RequestBody Product product) {
+        return productService.productUpdate(product);
+    }
 
 }
