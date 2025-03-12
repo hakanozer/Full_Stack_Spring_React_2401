@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -94,6 +91,18 @@ public class ProductService {
             return new ResponseEntity<>(product, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    public ResponseEntity deleteProduct(Long pid) {
+        ResponseEntity res = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (pid == null || pid < 1) { } else {
+            Optional<Product> productOptional = productRepository.findById(pid);
+            if (productOptional.isPresent()) {
+                productRepository.deleteById(pid);
+                res = new ResponseEntity(HttpStatus.OK);
+            }
+        }
+        return res;
     }
 
 }

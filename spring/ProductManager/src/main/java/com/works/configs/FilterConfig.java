@@ -1,0 +1,42 @@
+package com.works.configs;
+
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Configuration;
+
+import java.io.IOException;
+
+@Configuration
+// olmayan özelliğin springe eklemesi yada
+// var olan özelliğin değiştirilmesi
+public class FilterConfig implements Filter {
+
+    @Override
+    public void init(jakarta.servlet.FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
+        // uygulama ayağa kalktığında bir kez çalışam metodtur.
+        System.out.println("Server UP");
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+
+        // request -> kullanıcıdan gelen değerler, url, data, json, ip, header vb.
+        // response -> programın ürettiği ve kullancının gördüğü datalar url, data, json, header, vb.
+
+        String url = request.getRequestURI();
+        String ip = request.getRemoteAddr();
+        System.out.println(ip + " " +url);
+
+        filterChain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+        Filter.super.destroy();
+        System.out.println("Server DOWN");
+    }
+}

@@ -69,4 +69,9 @@ public class ProductRestController {
         return productService.productUpdate(product);
     }
 
+    @DeleteMapping("delete/{pid}")
+    public ResponseEntity delete( @PathVariable Long pid) {
+        return productService.deleteProduct(pid);
+    }
+
 }
