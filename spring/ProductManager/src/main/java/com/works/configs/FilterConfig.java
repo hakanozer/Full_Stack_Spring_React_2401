@@ -29,7 +29,8 @@ public class FilterConfig implements Filter {
 
         String url = request.getRequestURI();
         String ip = request.getRemoteAddr();
-        System.out.println(ip + " " +url);
+        String sessionID = request.getSession().getId();
+        System.out.println(ip + " " +url + " " + sessionID);
 
         filterChain.doFilter(request, response);
     }
