@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @Configuration
 // olmayan özelliğin springe eklemesi yada
@@ -30,9 +31,35 @@ public class FilterConfig implements Filter {
         String url = request.getRequestURI();
         String ip = request.getRemoteAddr();
         String sessionID = request.getSession().getId();
-        System.out.println(ip + " " +url + " " + sessionID);
 
-        filterChain.doFilter(request, response);
+        // free urls
+        String[] freeUrls = {"/customer"};
+        boolean loginStatus = false;
+        for (String freeUrl : freeUrls) {
+            if (url.startsWith(freeUrl)) {
+                loginStatus = true;
+            }
+        }
+
+        if (loginStatus) {
+            // oturum gerekmiyor
+            filterChain.doFilter(request, response);
+        }else {
+            // oturum gerekli
+            Object userObject = request.getSession().getAttribute("user");
+            if (userObject != null) {
+                // oturum var hizmeti sun
+                filterChain.doFilter(request, response);
+            }else {
+                // oturum yok hizmet hatası ver
+                PrintWriter out = response.getWriter();
+                response.setHeader("Content-Type", "application/json;charset=UTF-8");
+                out.println("{ \"status\": false, \"message\": \"Lütfen oturum açınız\" }");
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            }
+        }
+
+
     }
 
     @Override

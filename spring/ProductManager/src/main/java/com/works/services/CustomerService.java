@@ -1,31 +1,41 @@
 package com.works.services;
 
 import com.works.entities.Customer;
+import com.works.entities.dto.CustomerLoginDto;
 import com.works.entities.dto.CustomerRegisterDto;
 import com.works.repositories.CustomerRepository;
-import com.works.utils.SecurityUtil;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
 
-    //@Autowired
-    //ModelMapper objModelMapper;
 
     private final CustomerRepository customerRepository;
     private final ModelMapper objModelMapper;
-    private final ModelMapper objConfigModelMapper;
-    private final SecurityUtil securityUtil;
-
+    private final HttpServletRequest request;
 
     public Customer register(CustomerRegisterDto customerRegisterDto) {
         Customer customer = objModelMapper.map(customerRegisterDto, Customer.class);
-        securityUtil.call1();
         return customerRepository.save(customer);
+    }
+
+    public ResponseEntity login(CustomerLoginDto customerLoginDto) {
+        Optional<Customer> optionalCustomer = customerRepository.findByEmailEqualsIgnoreCaseAndPasswordEquals(customerLoginDto.getEmail(), customerLoginDto.getPassword());
+        if (optionalCustomer.isPresent()) {
+            Customer customer = optionalCustomer.get();
+            // oturum açılıyor
+            request.getSession().setAttribute("user", customer);
+            return new ResponseEntity(customer, HttpStatus.OK);
+        }
+        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
     }
 
 

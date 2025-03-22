@@ -1,7 +1,9 @@
 package com.works.services;
 
+import com.works.entities.Customer;
 import com.works.entities.Product;
 import com.works.repositories.ProductRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
@@ -21,6 +23,7 @@ import java.util.*;
 public class ProductService {
 
     final ProductRepository productRepository;
+    final HttpServletRequest request;
 
     //@ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity save( Product product ) {
@@ -44,6 +47,9 @@ public class ProductService {
     public Page<Product> all( int page, int size ) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> pageProduct = productRepository.findAll(pageable);
+        Object customerObj = request.getSession().getAttribute("user");
+        Customer customer = (Customer) customerObj;
+        System.out.println(customer);
         return pageProduct;
     }
 

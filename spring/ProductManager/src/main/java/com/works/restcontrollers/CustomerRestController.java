@@ -1,10 +1,12 @@
 package com.works.restcontrollers;
 
 import com.works.entities.Customer;
+import com.works.entities.dto.CustomerLoginDto;
 import com.works.entities.dto.CustomerRegisterDto;
 import com.works.services.CustomerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,9 +21,12 @@ public class CustomerRestController {
 
     @PostMapping("register")
     public Customer register(@Valid @RequestBody CustomerRegisterDto customerRegisterDto){
-        //return customerService.register(customerRegisterDto);
-        System.out.println(customerRegisterDto);
-        return null;
+        return customerService.register(customerRegisterDto);
+    }
+
+    @PostMapping("login")
+    public ResponseEntity login(@Valid @RequestBody CustomerLoginDto customerLoginDto){
+        return customerService.login(customerLoginDto);
     }
 
 }
