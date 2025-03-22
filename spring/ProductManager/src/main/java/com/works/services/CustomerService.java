@@ -32,6 +32,7 @@ public class CustomerService {
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
             // oturum açılıyor
+            customer.setPassword(null);
             request.getSession().setAttribute("user", customer);
             return new ResponseEntity(customer, HttpStatus.OK);
         }
