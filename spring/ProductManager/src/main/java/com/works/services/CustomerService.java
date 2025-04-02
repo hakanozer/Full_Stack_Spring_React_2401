@@ -11,6 +11,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -31,15 +34,19 @@ public class CustomerService {
     }
 
     public ResponseEntity login(CustomerLoginDto customerLoginDto) {
-        Optional<Customer> optionalCustomer = customerRepository.findByEmailEqualsIgnoreCaseAndPasswordEquals(customerLoginDto.getEmail(), customerLoginDto.getPassword());
+        Optional<Customer> optionalCustomer = customerRepository.findByEmailEqualsIgnoreCase(customerLoginDto.getEmail());
         if (optionalCustomer.isPresent()) {
             Customer customer = optionalCustomer.get();
-            // oturum açılıyor
-            customer.setPassword(null);
-            request.getSession().setAttribute("user", customer);
-            return new ResponseEntity(customer, HttpStatus.OK);
+            String newPass = tinkEncDec.decrypt( customer.getPassword() );
+            if ( newPass.equals( customerLoginDto.getPassword() ) ) {
+                request.getSession().setAttribute("user", customer);
+                return new ResponseEntity(customer, HttpStatus.OK);
+            }
         }
-        return new ResponseEntity(HttpStatus.UNAUTHORIZED);
+        Map<String, Object> mp = new LinkedHashMap<>();
+        mp.put("status", false);
+        mp.put("message", "Username or password fail!");
+        return new ResponseEntity(mp,HttpStatus.UNAUTHORIZED);
     }
 
 
