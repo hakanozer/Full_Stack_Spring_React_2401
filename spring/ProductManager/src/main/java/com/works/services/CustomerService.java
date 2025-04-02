@@ -21,9 +21,12 @@ public class CustomerService {
     private final CustomerRepository customerRepository;
     private final ModelMapper objModelMapper;
     private final HttpServletRequest request;
+    private final TinkEncDec tinkEncDec;
 
     public Customer register(CustomerRegisterDto customerRegisterDto) {
+        String newPass = tinkEncDec.encrypt( customerRegisterDto.getPassword() );
         Customer customer = objModelMapper.map(customerRegisterDto, Customer.class);
+        customer.setPassword( newPass );
         return customerRepository.save(customer);
     }
 
