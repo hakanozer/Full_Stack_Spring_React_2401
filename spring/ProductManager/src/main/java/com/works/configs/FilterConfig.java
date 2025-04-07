@@ -42,7 +42,7 @@ public class FilterConfig implements Filter {
         String agent = request.getHeader("User-Agent");
 
         // free urls
-        String[] freeUrls = {"/customer"};
+        String[] freeUrls = {"/customer", "/swagger-ui", "/v3"};
         boolean loginStatus = false;
         for (String freeUrl : freeUrls) {
             if (url.startsWith(freeUrl)) {

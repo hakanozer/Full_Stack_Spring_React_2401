@@ -2,6 +2,11 @@ package com.works.restcontrollers;
 
 import com.works.entities.Product;
 import com.works.services.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -17,10 +22,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("product")
 @Validated
+@Tag(name = "Product Rest Controller", description = "Product Manager")
+@SecurityRequirement(name = "session")
 public class ProductRestController {
 
     final ProductService productService;
 
+    @Operation(summary = "Add Product Save")
     @PostMapping("save")
     public ResponseEntity save(@Valid @RequestBody Product product) {
         return productService.save(product);
