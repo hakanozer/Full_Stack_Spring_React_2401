@@ -7,12 +7,70 @@
 	},
 	"item": [
 		{
+			"name": "Customer Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"Mehmet Bil\",\n    \"email\": \"mehmnet@mail.com\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/customer/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Customer Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"ali@mail.com\",\n    \"password\": \"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/customer/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Product List",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8090/product/list",
+					"raw": "http://localhost:8090/product/list?page=0&size=5",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -21,6 +79,16 @@
 					"path": [
 						"product",
 						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
 					]
 				}
 			},
@@ -33,7 +101,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"title\": \"Pro-1\",\n    \"description\": \"Pro-1 Detail\",\n    \"status\": \"forSale\",\n    \"price\": 24000,\n    \"color\": \"ff0099\"\n}",
+					"raw": "{\n    \"title\": \"P\",\n    \"description\": \"Pro-1 Detail\",\n    \"status\": \"forSale\",\n    \"price\": 24000,\n    \"color\": \"#ff0099\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -93,7 +161,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8090/product/single",
+					"raw": "http://localhost:8090/product/single?pid=10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -102,6 +170,166 @@
 					"path": [
 						"product",
 						"single"
+					],
+					"query": [
+						{
+							"key": "pid",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Search",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/product/search?q=pe&page=1&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"search"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "pe"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Color",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/product/getColor/116613",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"getColor",
+						"116613"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"pid\": 4,\n    \"title\": \"Cebahir Pro\",\n    \"description\": \"Disp fx of base of neck of unspecified femur, sequela\",\n    \"status\": \"forRent\",\n    \"price\": 46566,\n    \"color\": \"#4be596\",\n    \"date\": \"15-02-2025 13:18:22\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/product/update",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"update"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Product Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/product/delete/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"product",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Address Save",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"C - Adres\",\n    \"address\": \"C Adress Detail\",\n    \"phone\": \"34656867\",\n    \"cityList\": [\n        { \"cid\": 1 },\n        { \"cid\": 2 },\n        { \"cid\": 3 }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/address/save",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"address",
+						"save"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Address List",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8090/address/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"address",
+						"list"
 					]
 				}
 			},
