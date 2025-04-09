@@ -3,6 +3,7 @@ package com.works.configs;
 import com.works.entities.Customer;
 import com.works.entities.Info;
 import com.works.repositories.InfoRepository;
+import com.works.utils.SecurityUtil;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -56,6 +57,7 @@ public class FilterConfig implements Filter {
         }else {
             // oturum gerekli
             Object userObject = request.getSession().getAttribute("user");
+            Customer customerSession = SecurityUtil.customerSession;
             if (userObject != null) {
                 // oturum var hizmeti sun
                 Customer customer = (Customer) userObject;

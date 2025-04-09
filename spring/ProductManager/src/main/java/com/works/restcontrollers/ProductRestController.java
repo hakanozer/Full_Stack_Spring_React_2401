@@ -34,6 +34,11 @@ public class ProductRestController {
         return productService.save(product);
     }
 
+    @PutMapping("update")
+    public ResponseEntity<Product> update(@Valid @RequestBody Product product) {
+        return productService.productUpdate(product);
+    }
+
     @PostMapping("saveAll")
     public List<Product> saveAll(@RequestBody List<Product> products) {
         return productService.saveAll(products);
@@ -71,10 +76,7 @@ public class ProductRestController {
         return productService.getColors(color);
     }
 
-    @PutMapping("update")
-    public ResponseEntity<Product> update(@Valid @RequestBody Product product) {
-        return productService.productUpdate(product);
-    }
+
 
     @DeleteMapping("delete/{pid}")
     public ResponseEntity delete( @PathVariable Long pid) {

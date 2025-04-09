@@ -4,6 +4,7 @@ import com.works.entities.Customer;
 import com.works.entities.dto.CustomerLoginDto;
 import com.works.entities.dto.CustomerRegisterDto;
 import com.works.repositories.CustomerRepository;
+import com.works.utils.SecurityUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -39,6 +40,7 @@ public class CustomerService {
             String newPass = tinkEncDec.decrypt( customer.getPassword() );
             if ( newPass.equals( customerLoginDto.getPassword() ) ) {
                 request.getSession().setAttribute("user", customer);
+                SecurityUtil.customerSession = customer;
                 return new ResponseEntity(customer, HttpStatus.OK);
             }
         }
