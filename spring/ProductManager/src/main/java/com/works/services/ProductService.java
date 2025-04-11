@@ -57,6 +57,7 @@ public class ProductService {
         Optional<Product> product = productRepository.findById(pid);
         Product pro = product.orElse(null);
         System.out.println(pro);
+        Random random = new Random();
         return pro;
     }
 

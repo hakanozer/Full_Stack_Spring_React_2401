@@ -19,6 +19,7 @@ public class AppBeans {
         return new ModelMapper();
     }
 
+
     @Bean(name = "objConfigModelMapper")
     public ModelMapper modelMapper2(CustomerRepository customerRepository) {
         ModelMapper modelMapper = new ModelMapper();
