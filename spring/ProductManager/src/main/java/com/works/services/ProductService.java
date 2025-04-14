@@ -6,6 +6,7 @@ import com.works.repositories.ProductRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class ProductService {
 
+    final CacheManager cacheManager;
     final ProductRepository productRepository;
     final HttpServletRequest request;
 

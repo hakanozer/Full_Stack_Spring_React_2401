@@ -10,12 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
@@ -50,6 +49,23 @@ public class CustomerService {
         return new ResponseEntity(mp,HttpStatus.UNAUTHORIZED);
     }
 
+    int i = 0;
+    // @Scheduled(fixedDelay = 5000, timeUnit = TimeUnit.MILLISECONDS)
+    public void autoCall() {
+        i++;
+        System.out.println("autoCall Call : " + i);
+    }
+
+    public void call() {
+        Timer timer = new Timer();
+        timer.schedule(task, 5000);
+    }
+    TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            System.out.println("autoCall Call : " + i);
+        }
+    };
 
 
 }
