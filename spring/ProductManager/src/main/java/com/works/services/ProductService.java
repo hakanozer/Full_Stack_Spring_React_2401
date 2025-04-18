@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.Response;
 import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -33,6 +34,7 @@ public class ProductService {
         product.setDate( date );
         productRepository.save(product); // setID ?
         if (product != null) {
+            cacheManager.getCache("product").clear();
             return new ResponseEntity(product, HttpStatus.OK); // 200
         }else {
             return new ResponseEntity(HttpStatus.BAD_REQUEST); // 400
@@ -46,12 +48,13 @@ public class ProductService {
     // sayfalama
     // kaçıncı sayfa
     // her sayfada kaç item
+    @Cacheable("product")
     public Page<Product> all( int page, int size ) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Product> pageProduct = productRepository.findAll(pageable);
-        Object customerObj = request.getSession().getAttribute("user");
-        Customer customer = (Customer) customerObj;
-        System.out.println(customer);
+        //Object customerObj = request.getSession().getAttribute("user");
+        //Customer customer = (Customer) customerObj;
+        //System.out.println(customer);
         return pageProduct;
     }
 
