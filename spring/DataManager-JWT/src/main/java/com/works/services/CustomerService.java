@@ -4,6 +4,12 @@ import com.works.entities.Customer;
 import com.works.entities.Role;
 import com.works.repositories.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -14,10 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +29,28 @@ public class CustomerService implements UserDetailsService {
 
     private final CustomerRepository customerRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JWTService jwtService;
+    private final AuthenticationConfiguration configuration;
+
+    public ResponseEntity login(Customer customer) {
+        Map<String,Object> map = new LinkedHashMap<>();
+        try {
+            configuration.getAuthenticationManager().authenticate(
+                    new UsernamePasswordAuthenticationToken(customer.getUsername(), customer.getPassword())
+            );
+            UserDetails userDetails = loadUserByUsername(customer.getUsername());
+            String jwt = jwtService.generateToken(userDetails);
+            map.put("jwt", jwt);
+            Optional<Customer> customerOptional = customerRepository.findByUsernameEqualsIgnoreCase(customer.getUsername());
+            map.put("customer", customerOptional.get());
+            return ResponseEntity.ok(map);
+        }catch (Exception e){
+            map.put("status", 401);
+            map.put("error", e.getMessage());
+            return new ResponseEntity(map, HttpStatus.UNAUTHORIZED);
+        }
+    }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -63,6 +88,7 @@ public class CustomerService implements UserDetailsService {
             return customerRepository.save(customer);
         }
     }
+
 
 
 }
