@@ -112,6 +112,44 @@
                 <td>mehmet@mail.com</td>
             </tr>
         </tbody>
+    </table>
+
+    <hr/>
+    <a href="mailto:ali@mail.com">ali@mail.com</a>
+    <a href="tel:+905555555555">+90 555 555 55 55</a>
+    <a href="https://www.google.com/maps/place/İstanbul/@41.0082,28.9784,12z/data=!3m1!4b1!4m6!3m5!1s0x14caa3b8f8e7d5f7:0x2c9e5a2d5f5f5f5f!8m2!3d41.0082!4d28.9784!16zL20vMDJqZzQ?entry=ttu" target="_blank">İstanbul</a>
+    <a href="https://wa.me/+905436429595?text=merhaba ürün hakkında bilgi istiyorum.">Whatsapp</a>
+
+    <hr/>
+    
+    <form method="post">
+        <input required type="text" name="name" placeholder="Ad" /><br/>
+        <input required type="text" name="surname" placeholder="Soyad" /><br/>
+        <input required type="email" name="email" placeholder="E-Mail" /><br/>
+        <input required type="password" name="password" placeholder="Şifre" /><br/>
+        <input required type="number" min="18" max="130" name="age" placeholder="Yaş" /><br/>
+        <input required type="tel" name="phone" placeholder="Telefon" /><br/>
+        <select required name="city">
+            <option value="">Şehir Seçiniz</option>
+            <option value="İstanbul">İstanbul</option>
+            <option value="Ankara">Ankara</option>
+            <option value="İzmir">İzmir</option>
+            <option value="Bursa">Bursa</option>
+        </select><br/>
+        Koşu <input type="checkbox" name="kosu" /><br>
+        Güreş <input type="checkbox" name="gures" /><br>
+        Yüzme <input type="checkbox" name="yuzme" /><br>
+        <textarea name="message" placeholder="Mesajınız" rows="5" cols="30"></textarea><br/>
+        <input type="color" name="color" /><br/>
+        <input type="date" name="date" /><br/>
+        <button type="submit">Gönder</button>
+    </form>
+
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
 
 
 </body>
