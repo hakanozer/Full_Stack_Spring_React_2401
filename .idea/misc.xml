@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/spring/Days_1/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/DataManager/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/ProductManager/pom.xml" />
+        <option value="$PROJECT_DIR$/spring/DataManager-JWT/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_1/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_2/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_3/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_4/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_5/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_6/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_7/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_8/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_9/pom.xml" />
+        <option value="$PROJECT_DIR$/java_se/Days_10/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="corretto-21" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
