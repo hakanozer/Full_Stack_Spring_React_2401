@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 
 function Login() {
+
+  // state - değişken
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
   // arrow func
   const userLogin = (evt: React.FormEvent) => {
     evt.preventDefault()
-    console.log("userLogin call")
+    console.log(email, password)
   }
 
   return (
@@ -16,14 +21,14 @@ function Login() {
             <h2>User Login</h2>
             <form onSubmit={userLogin}>
               <div className='mb-2'>
-                <input required type='email' placeholder='E-Mail' className='form-control' />
+                <input onChange={(evt) => setEmail(evt.target.value)} required type='email' placeholder='E-Mail' className='form-control' />
               </div>
               <div className='mb-2'>
-                <input required type='password' placeholder='Password' className='form-control' />
+                <input onChange={(evt) => setPassword(evt.target.value)} required type='password' placeholder='Password' className='form-control' />
               </div>
               <div className='d-flex justify-content-between'>
                 <button className='btn btn-success'>Login</button>
-                <a className='btn btn-dark' href=''>Register</a>
+                <NavLink to={'/register'} className='btn btn-dark'>Register</NavLink>
               </div>
             </form>
           </div>
