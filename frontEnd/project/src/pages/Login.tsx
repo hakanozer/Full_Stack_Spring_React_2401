@@ -15,6 +15,7 @@ function Login() {
     .then(res => {
       const dt = res.data
       console.log(dt.data.access_token)
+      window.location.replace('/dashboard')
     })
     .catch(err => {
       alert("Kullanıcı adı yada şifre hatalı!")
