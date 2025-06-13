@@ -1,16 +1,24 @@
 import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { authLogin } from '../services/userApi'
 
 function Login() {
 
   // state - değişken
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('hakanozer02@gmail.com')
+  const [password, setPassword] = useState('123456')
 
   // arrow func
   const userLogin = (evt: React.FormEvent) => {
     evt.preventDefault()
-    console.log(email, password)
+    authLogin(email, password)
+    .then(res => {
+      const dt = res.data
+      console.log(dt.data.access_token)
+    })
+    .catch(err => {
+      alert("Kullanıcı adı yada şifre hatalı!")
+    })
   }
 
   return (
@@ -21,10 +29,10 @@ function Login() {
             <h2>User Login</h2>
             <form onSubmit={userLogin}>
               <div className='mb-2'>
-                <input onChange={(evt) => setEmail(evt.target.value)} required type='email' placeholder='E-Mail' className='form-control' />
+                <input defaultValue={email} onChange={(evt) => setEmail(evt.target.value)} required type='email' placeholder='E-Mail' className='form-control' />
               </div>
               <div className='mb-2'>
-                <input onChange={(evt) => setPassword(evt.target.value)} required type='password' placeholder='Password' className='form-control' />
+                <input defaultValue={password} onChange={(evt) => setPassword(evt.target.value)} required type='password' placeholder='Password' className='form-control' />
               </div>
               <div className='d-flex justify-content-between'>
                 <button className='btn btn-success'>Login</button>
