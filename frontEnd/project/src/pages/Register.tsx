@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
+import { authSignUp } from '../services/userApi'
 
 function Register() {
 
   const [passShow, setPassShow] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,10 +15,29 @@ function Register() {
   const userRegister = (evt: React.FormEvent) => {
     evt.preventDefault() // formun gönderilirken sahneyi terk etmesini engelle
     setError('')
+    setSuccess('')
     if( password !== passwordAgain ) {
       setError('Password and Password Again not Equals!')
     }else {
-      console.log(name, email, password)
+      authSignUp(name, email, password)
+      .then(res => {
+        const dt = res.data
+        setSuccess(dt.message)
+        setTimeout(() => {
+          window.location.replace('/')
+        }, 3000);
+      })
+      .catch(err => {
+        const res = err.response.data.errors
+        const emailError = res.email
+        const passwordError = res.password
+        if (emailError) {
+          setError(emailError[0])
+        }
+        if (passwordError) {
+          setError(passwordError[0])
+        }
+      })
     }
     
   }
@@ -31,6 +52,12 @@ function Register() {
           { error !== '' &&
             <div className="alert alert-danger" role="alert">
               { error }
+            </div>
+          }
+
+          { success !== '' &&
+            <div className="alert alert-success" role="alert">
+              { success }
             </div>
           }
 
