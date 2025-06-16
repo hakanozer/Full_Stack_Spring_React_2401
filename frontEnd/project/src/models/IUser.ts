@@ -1,3 +1,8 @@
+export interface IJWTUser {
+    meta: Meta;
+    data: User;
+}
+
 export interface IUser {
     meta: Meta;
     data: Data;

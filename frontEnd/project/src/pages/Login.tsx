@@ -14,7 +14,7 @@ function Login() {
     authLogin(email, password)
     .then(res => {
       const dt = res.data
-      console.log(dt.data.access_token)
+      localStorage.setItem("token",dt.data.access_token)
       window.location.replace('/dashboard')
     })
     .catch(err => {
