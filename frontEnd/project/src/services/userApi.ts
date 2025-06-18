@@ -8,6 +8,13 @@ export const jwtControl = (jwt: string) => {
     return config.get<IJWTUser>('profile/me', { headers: headers })
 }
 
+export const jwtLogout = (jwt:string) => {
+    const headers = {
+        Authorization: `Bearer ${jwt}`
+    }
+    return config.post('auth/logout', {}, { headers: headers })
+}
+
 // user login
 export const authLogin = (email: string, password: string) => {
     const sendObj = {
