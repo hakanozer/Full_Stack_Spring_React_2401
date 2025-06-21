@@ -9,7 +9,6 @@ import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Likes from './pages/Likes';
 
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );

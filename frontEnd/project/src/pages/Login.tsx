@@ -10,7 +10,7 @@ function Login() {
 
   // arrow func
   const userLogin = (evt: React.FormEvent) => {
-    evt.preventDefault()
+    evt.preventDefault() // Form gönderimini, sayfayı terk etmeyi durdur.
     authLogin(email, password)
     .then(res => {
       const dt = res.data

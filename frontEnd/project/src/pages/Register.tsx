@@ -42,6 +42,11 @@ function Register() {
     
   }
 
+  const emailValid = (dataEmail: string) => {
+    setEmail(dataEmail)
+    //console.log(dataEmail)
+  }
+
   return (
     <>
       <div className='row'>
@@ -66,7 +71,7 @@ function Register() {
               <input required onChange={(evt) => setName(evt.target.value)} placeholder='Name' className='form-control' />
             </div>
             <div className='mb-2'>
-              <input required onChange={(evt) => setEmail(evt.target.value)} type='email' placeholder='E-Mail' className='form-control' />
+              <input required onChange={(evt) => emailValid(evt.target.value)} type='email' placeholder='E-Mail' className='form-control' />
             </div>
             <div className='mb-2 input-group'>
               <input required onChange={(evt) => setPassword(evt.target.value)}  type={passShow === true ? 'text' : 'password'} placeholder='Password' className='form-control' />

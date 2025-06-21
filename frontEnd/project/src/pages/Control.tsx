@@ -34,7 +34,7 @@ function Control( props: {item: JSX.Element} ) {
         {props.item}
     </>
     : 
-    <Navigate to={'/'} />
+      <Navigate to={'/'} />
     }
     </>
   )

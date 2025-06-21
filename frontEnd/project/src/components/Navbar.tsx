@@ -17,7 +17,7 @@ function Navbar(props: {name: string}) {
                 localStorage.removeItem('token')
                 window.location.replace('/')
             })
-
+            
     }
   }  
 
@@ -48,7 +48,7 @@ function Navbar(props: {name: string}) {
                 </ul>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">{props.name}</a>
+                <a className="nav-link disabled" aria-disabled="true">Sn. {props.name}</a>
                 </li>
             </ul>
             <form className="d-flex" role="search">
