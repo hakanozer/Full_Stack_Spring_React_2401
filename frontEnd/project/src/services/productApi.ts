@@ -1,4 +1,4 @@
-import { IProducts } from "../models/IProducts";
+import { IProducts, ISingleProduct } from "../models/IProducts";
 import { config } from "./config";
 
 export const allProduct = (page: number) => {
@@ -8,3 +8,7 @@ export const allProduct = (page: number) => {
     }
     return config.get<IProducts>('products', {params: sendObj} )
 } 
+
+export const singleProduct = (pid: string) => {
+    return config.get<ISingleProduct>('products/'+pid)
+}

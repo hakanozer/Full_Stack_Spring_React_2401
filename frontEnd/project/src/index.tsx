@@ -8,6 +8,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import Likes from './pages/Likes';
+import Detail from './pages/Detail';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -21,6 +22,7 @@ const routes =
     <Route path='/register' element={<Register/>} />
     <Route path='/dashboard' element={<Control item={ <Dashboard /> } />} />
     <Route path='/likes' element={<Control item={ <Likes /> } />} />
+    <Route path='/detail/:pid' element={<Control item={ <Detail /> } />} />
   </Routes>
 </BrowserRouter>
 
