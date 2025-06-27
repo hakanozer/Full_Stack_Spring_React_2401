@@ -22,3 +22,23 @@ export const likeControl = (pid: number) => {
     }
 
 }
+
+
+export const isFncLike = (pid: number) => {
+    const stLikes = localStorage.getItem('likes')
+    if (stLikes) {
+        const arr = JSON.parse(stLikes) as number[]
+        const index = arr.findIndex(item => item === pid)
+        return index > -1 ? true : false
+    }
+    return false
+}
+
+export const allLikes = () => {
+    const stLikes = localStorage.getItem('likes')
+    if (stLikes) {
+        const arr = JSON.parse(stLikes) as number[]
+        return arr
+    }
+    return []
+}

@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { jwtLogout } from '../services/userApi';
+import { allLikes } from '../utils/storeLikes';
 
 function Navbar(props: {name: string}) {
+
+   const [likesCount, setLikesCount] = useState(0) 
+   useEffect(() => {
+    const arrLike = allLikes()
+    setLikesCount(arrLike.length)
+   }, []) 
 
   const logout = () => {
     const answer = window.confirm("Are you sure?");
@@ -48,7 +55,7 @@ function Navbar(props: {name: string}) {
                 </ul>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">Sn. {props.name}</a>
+                <a className="nav-link disabled" aria-disabled="true">Sn. {props.name} - ({likesCount})</a>
                 </li>
             </ul>
             <form className="d-flex" role="search">

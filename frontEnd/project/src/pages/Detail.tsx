@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProduct } from '../services/productApi'
 import { Product } from '../models/IProducts'
-import { likeControl } from '../utils/storeLikes'
+import { likeControl, isFncLike } from '../utils/storeLikes'
 
 function Detail() {
 
@@ -15,6 +15,8 @@ function Detail() {
             const dt = res.data
             setItem(dt.data)
             setBigImage(dt.data.images[0])
+            const likeStatus = isFncLike(dt.data.id)
+            setIsLike(likeStatus)
         }).catch(err => {
             window.location.replace('/dashboard')
         })
@@ -45,7 +47,7 @@ function Detail() {
                     <img className='img-fluid' src={bigImage} />
                     
                     { item.images.map((img, index) => 
-                        <img role='button' onClick={() => setBigImage(img)} src={img} className='img-thumbnail m-1' width={120} />
+                        <img key={index} role='button' onClick={() => setBigImage(img)} src={img} className='img-thumbnail m-1' width={120} />
                     )}
                 </div>
             </div>
