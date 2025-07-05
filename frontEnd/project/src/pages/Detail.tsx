@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { singleProduct } from '../services/productApi'
 import { Product } from '../models/IProducts'
-import { likeControl, isFncLike } from '../utils/storeLikes'
+import { likeControl, isFncLike, allLikes } from '../utils/storeLikes'
+import { useDispatch } from 'react-redux'
+import { ILikesAction } from '../useRedux/likesReducer'
 
 function Detail() {
 
@@ -23,10 +25,17 @@ function Detail() {
     }
    }, [])
 
+   const dispath = useDispatch()
    const [isLike, setIsLike] = useState(false)
    const likesBtn = (pid:number) => {
     setIsLike(!isLike)
     likeControl(pid)
+    const arrLike = allLikes()
+    const sendObj:ILikesAction = {
+        type: 'ALL_LIKES',
+        payload: arrLike
+    }
+    dispath(sendObj)
    }
    
 

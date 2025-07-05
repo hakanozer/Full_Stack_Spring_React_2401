@@ -7,8 +7,17 @@ export const allProduct = (page: number) => {
         per_page: 10
     }
     return config.get<IProducts>('products', {params: sendObj} )
-} 
+}
 
 export const singleProduct = (pid: string) => {
     return config.get<ISingleProduct>('products/'+pid)
+}
+
+export const searchProduct = (q: string) => {
+    const sendObj = {
+        query: q,
+        page: 1,
+        per_page: 10
+    }
+    return config.get<IProducts>('products/search', {params: sendObj} )
 }

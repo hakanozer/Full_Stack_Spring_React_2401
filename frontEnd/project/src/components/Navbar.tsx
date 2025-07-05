@@ -1,21 +1,39 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { jwtLogout } from '../services/userApi';
 import { allLikes } from '../utils/storeLikes';
+import { useDispatch, useSelector } from 'react-redux';
+import { StateType } from '../useRedux/reduxStore';
+import { ILikesAction } from '../useRedux/likesReducer';
 
 function Navbar(props: {name: string}) {
 
-   const [likesCount, setLikesCount] = useState(0) 
+    const inputRef = useRef<HTMLInputElement>(null)
+
+   // redux ile data çekme
+   const allLike = useSelector((item: StateType) => item.likesReducer )
+   // redux'a data yazma
+   const dispath = useDispatch()
    useEffect(() => {
     const arrLike = allLikes()
-    setLikesCount(arrLike.length)
+    const sendObj:ILikesAction = {
+        type: 'ALL_LIKES',
+        payload: arrLike
+    }
+    dispath(sendObj)
    }, []) 
+
+   useEffect(() => {
+    if (inputRef.current) {
+        //inputRef.current.focus();
+        //inputRef.current.style.backgroundColor = '#ffffff';
+    }
+   }, [])
 
   const logout = () => {
     const answer = window.confirm("Are you sure?");
     if (answer) {
         const jwt = localStorage.getItem('token') ?? ''
-
             jwtLogout(jwt).then(res => {
                 console.log(res.data)
             }).catch(err => {
@@ -24,7 +42,6 @@ function Navbar(props: {name: string}) {
                 localStorage.removeItem('token')
                 window.location.replace('/')
             })
-            
     }
   }  
 
@@ -55,11 +72,11 @@ function Navbar(props: {name: string}) {
                 </ul>
                 </li>
                 <li className="nav-item">
-                <a className="nav-link disabled" aria-disabled="true">Sn. {props.name} - ({likesCount})</a>
+                <a className="nav-link disabled" aria-disabled="true">Sn. {props.name} - ({allLike.length})</a>
                 </li>
             </ul>
-            <form className="d-flex" role="search">
-                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+            <form action='/search' className="d-flex" role="search">
+                <input name='q' ref={inputRef} className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
                 <button className="btn btn-outline-success" type="submit">Search</button>
             </form>
             </div>

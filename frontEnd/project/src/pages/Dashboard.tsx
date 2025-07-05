@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { allProduct } from '../services/productApi'
 import { Product } from '../models/IProducts'
 import ProductsList from '../components/ProductsList'
+import { useSelector } from 'react-redux'
+import { StateType } from '../useRedux/reduxStore'
 
 function Dashboard() {
 
@@ -26,9 +28,10 @@ function Dashboard() {
     })
   }
 
+  const allLike = useSelector((item: StateType) => item.likesReducer )
   return (
     <>
-    <h3>Products</h3>
+    <h3>Products - ({allLike.length})</h3>
     <nav>
       <ul className="pagination pagination-sm">
         { pages.map((item) => 
