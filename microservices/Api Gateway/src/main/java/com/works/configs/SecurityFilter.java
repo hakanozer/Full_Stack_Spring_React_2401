@@ -2,6 +2,7 @@ package com.works.configs;
 
 import com.works.services.CustomerService;
 import com.works.services.JWTService;
+import io.micrometer.tracing.Tracer;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ public class SecurityFilter extends OncePerRequestFilter {
     private final HandlerExceptionResolver handlerExceptionResolver;
     private final JWTService jwtService;
     private final CustomerService customerService;
+    private final Tracer tracer;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -50,6 +52,12 @@ public class SecurityFilter extends OncePerRequestFilter {
                     }
                 }
             }
+            String spanId = tracer.currentSpan().context().spanId();
+            String traceId = tracer.currentSpan().context().traceId();
+
+            response.setHeader("spanId", spanId);
+            response.setHeader("traceId", traceId);
+
             filterChain.doFilter(request, response);
         }catch (Exception ex) {
             handlerExceptionResolver.resolveException(request, response, null, ex);

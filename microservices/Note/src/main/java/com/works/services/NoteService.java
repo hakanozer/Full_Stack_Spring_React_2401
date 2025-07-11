@@ -18,6 +18,8 @@ public class NoteService {
     }
 
     public List<Note> findAll() {
+        int i = 1;
+        int div = i / 0;
         return noteRepository.findAll();
     }
 
